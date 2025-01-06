@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
-const { database } = require('../config');
+const { database } = require('../configs');
+const Wallets = require('./Wallets');
 
 const Transactions = database.define('transactions', {
   id: {
@@ -35,6 +36,17 @@ const Transactions = database.define('transactions', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   }
+}, {
+  tableName: 'transactions',
+  timestamps: true,
+  createdAt: 'created_at',
+  updatedAt: false,
+});
+
+Transactions.belongsTo(Wallets, {
+  foreignKey: 'id',
+  sourceKey: 'wallet_id',
+  as: 'wallets',
 });
 
 module.exports = Transactions;

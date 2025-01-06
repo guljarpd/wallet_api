@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
-const { database } = require('../config');
+const { database } = require('../configs');
+const Users = require('./Users');
 
 const Wallets = database.define('wallets', {
   id: {
@@ -23,6 +24,17 @@ const Wallets = database.define('wallets', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
+}, {
+  tableName: 'wallets',
+  timestamps: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at'
+});
+
+Wallets.hasOne(Users, {
+  foreignKey: 'id',
+  sourceKey: 'user_id',
+  as: 'users',
 });
 
 module.exports = Wallets;

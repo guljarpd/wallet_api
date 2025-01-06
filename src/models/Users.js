@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { database } = require('../config');
+const { database } = require('../configs');
 
 const Users = database.define('users', {
   id: {
@@ -23,6 +23,11 @@ const Users = database.define('users', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
+}, {
+  tableName: 'users',
+  timestamps: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
 });
 
 module.exports = Users;

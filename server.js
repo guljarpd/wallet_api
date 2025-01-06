@@ -1,11 +1,21 @@
 const express = require('express');
 require('dotenv').config();
 const {database} = require('./src/configs');
+const routers = require('./src/routes');
 
 const PORT = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.json())
+
+app.use(routers);
+
+app.use('/', (req, res) => {
+    return res.status(200).json({
+        status: 'ok',
+        message: 'Wallet api'
+    });
+})
 
 
 app.listen(PORT, async () => {
