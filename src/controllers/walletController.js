@@ -185,7 +185,7 @@ const processTransaction = async (req, res) => {
 const getTransactions = async (req, res) => {
     try {
       const { walletId, skip = 0, limit = 10 } = req.query;
-      const transactions = await Transactions.findAll({
+      const {count, rows} = await Transactions.findAndCountAll({
         where: { wallet_id: parseInt(walletId) },
         offset: parseInt(skip),
         limit: parseInt(limit),
@@ -193,7 +193,10 @@ const getTransactions = async (req, res) => {
         attributes: ['wallet_id', 'balance', 'amount', 'transactions_id', [database.col('created_at'), 'date']]
       });
   
-      res.status(200).json(transactions);
+      res.status(200).json({
+        totalCount: count,
+        transactions: rows,
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: {message: 'Error fetching transactions'} });
