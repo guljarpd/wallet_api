@@ -7,12 +7,12 @@ const routers = require('./src/routes');
 const PORT = process.env.PORT || 8080;
 
 const app = express();
+// Configure CORS to allow all origins 
+app.use(cors());
 app.use(express.json())
 
 app.use(routers);
 
-// Configure CORS to allow all origins 
-app.use(cors());
 
 app.use('/', (req, res) => {
     return res.status(200).json({
