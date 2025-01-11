@@ -96,6 +96,7 @@ npm start
 ```
 The server will run on http://127.0.0.1:8080
 
+**I have deployed this application on render and base URL: https://wallet-api-ijd2.onrender.com/**
 
 ### Api Endpoints
 ---
