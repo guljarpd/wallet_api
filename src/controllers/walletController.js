@@ -190,7 +190,7 @@ const getTransactions = async (req, res) => {
         offset: parseInt(skip),
         limit: parseInt(limit),
         order: [['created_at', 'DESC']],
-        attributes: ['wallet_id', 'balance', 'amount', 'transactions_id', [database.col('created_at'), 'date']]
+        attributes: ['wallet_id', 'balance', 'amount', 'transactions_id', 'transaction_type', [database.col('created_at'), 'date']]
       });
   
       res.status(200).json({
