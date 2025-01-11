@@ -12,9 +12,7 @@ app.use(express.json())
 app.use(routers);
 
 // Configure CORS to allow all origins 
-app.use(cors({ 
-    origin: '*' 
-}));
+app.use(cors());
 
 app.use('/', (req, res) => {
     return res.status(200).json({
