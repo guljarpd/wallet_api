@@ -136,7 +136,7 @@ const processTransaction = async (req, res) => {
   
       if (!wallet) {
         await txn.rollback();
-        return res.status(404).json({ message: 'Wallet not found' });
+        return res.status(404).json({ error: {message: 'Wallet not found'} });
       }
   
       // Perform the credit/debit operation
@@ -145,7 +145,7 @@ const processTransaction = async (req, res) => {
       // Ensure balance doesn't go negative for debit transactions
       if (newBalance < 0) {
         await txn.rollback();
-        return res.status(400).json({ message: 'Insufficient balance' });
+        return res.status(400).json({ error: { message: 'Insufficient balance' }});
       }
   
       // Update wallet balance
